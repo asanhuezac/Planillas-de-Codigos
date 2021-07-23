@@ -1,9 +1,4 @@
-                              ***FENVID STATA***
-
 ********************************************************************
-clear all
-import excel "C:\Users\agust\Desktop\Universidad de Chile\Videos FENVID\Stata\Datos\Sub Casen.xlsx", sheet("Hoja1") cellrange(A1:Y20001) firstrow
-
 *-Importación de datos 
 {
 pwd 
