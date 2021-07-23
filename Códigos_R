@@ -1,13 +1,13 @@
 
-# Librerias útiles a cargar
+# Librerias Ãºtiles a cargar
 library(readr) # Archivos excel, xls, xlsx
 library(haven) # Archivos dta, sav, sas
 library(readxl) # Archivos csv, csv2, tsv, delim
-library(dplyr) # Manipulación de datos
-library(ggplot2) # Gráficos
+library(dplyr) # ManipulaciÃ³n de datos
+library(ggplot2) # GrÃ¡ficos
 library(WDI) # Datos online del World Development Indicators
 library(tidyquant) # Modela series financieras desde Yahoo Finance
-library(stargazer) # Comparación de modelos en un tabla
+library(stargazer) # ComparaciÃ³n de modelos en un tabla
 library(mfx) # Efectos Marginales
 library(tidyverse) 
 library(stringr)
@@ -25,7 +25,7 @@ library(desc)
 library(skimr)
 
 
-# Importación de Datos
+# ImportaciÃ³n de Datos
 Base_Excel <- read_excel("Directorio/Base_Excel")
 Base_Stata <- read_dta("Directorio/Base_Stata")
 Base_Csv <- read.csv("Directorio/Base_Csv")
@@ -37,7 +37,7 @@ Nombre_Data_Frame <- data.frame(Var_1,Var_2, ...)
 Sub_Data_Frame <- Data_Frame %>% select(Var_1, Var_2, ...)
 
 # Filtrando Observaciones
-Data_Frame_Filtrado <- Data_Frame %>% filter(condicion_1 | Condicion_2 & Condición_3 ... )
+Data_Frame_Filtrado <- Data_Frame %>% filter(condicion_1 | Condicion_2 & CondiciÃ³n_3 ... )
 
 # Renombrando Variables
 data_frame <- data_frame %>% rename(nombre_antiguo1 = nombre_nuevo1, 
@@ -47,9 +47,9 @@ data_frame <- data_frame %>% rename(nombre_antiguo1 = nombre_nuevo1,
 # Generando Variables y modificando etiquetas
 data_frame <- data_frame %>% 
   mutate(var_nueva = funcion(de_algo)) %>% 
-  mutate(var_dummy_simple = ifelse(condicion_1 | Condicion_2 & Condición_3 ... , Valor_Verdadero, Valor_Falso)) %>% 
-  mutate(var_dummy_compleja = ifelse(Condición_1... , Valor_Verdadero, ifelse(Condicion_1... , Valor_Verdadero, Valor_Falso))) %>%
-  mutate(var_categórica= ifelse(condicion_1... , "Texto_Verdadero",
+  mutate(var_dummy_simple = ifelse(condicion_1 | Condicion_2 & CondiciÃ³n_3 ... , Valor_Verdadero, Valor_Falso)) %>% 
+  mutate(var_dummy_compleja = ifelse(CondiciÃ³n_1... , Valor_Verdadero, ifelse(Condicion_1... , Valor_Verdadero, Valor_Falso))) %>%
+  mutate(var_categÃ³rica= ifelse(condicion_1... , "Texto_Verdadero",
                          ifelse(condicion_1... , "Texto_Verdadero",
                          ifelse(condicion_1... , "Texto_Verdadero", "Texto_Falso")))) %>% 
   mutate(var_existente = recode(var_existente,
@@ -57,35 +57,35 @@ data_frame <- data_frame %>%
                          "Etiqueta_antigua_2" = "Etiqueta_nueva_2",
                          ...))
 
-# Tabulación 
+# TabulaciÃ³n 
 Data_Frame %>% 
-  group_by(Var_categórica) %>% 
-  summarize(Promedio = mean(Var_númerica),
-            Mediana = median(Var_númerica),
-            Mínimo=min(Var_númerica),
-            Máximo=max(Var_númerica))
+  group_by(Var_categÃ³rica) %>% 
+  summarize(Promedio = mean(Var_nÃºmerica),
+            Mediana = median(Var_nÃºmerica),
+            MÃ­nimo=min(Var_nÃºmerica),
+            MÃ¡ximo=max(Var_nÃºmerica))
 
 dcast(Data_Frame, Var_filas ~ Var_columnas, 
-      estadística_descriptiva, 
-      value.var="variable_de_la_estadística_descriptiva", 
+      estadÃ­stica_descriptiva, 
+      value.var="variable_de_la_estadÃ­stica_descriptiva", 
       na.rm = TRUE)
 
-# Gráficos
+# GrÃ¡ficos
 Data_Frame %>% ggplot(mapping=aes(x=Var_absicas, y=Var_ordenadas, color=Var_para_color)) +
   geom_() + # (point, line, density, col, bar, boxplot, histogram) 
   
-  geom_smooth(data=Data_Frame[Data_Frame$Varcondicion_1 & Data_Frame$Varcondicion_2, ...], method='lm', color='algún_color', se=FALSE)+ # Regresión en el gráfico
+  geom_smooth(data=Data_Frame[Data_Frame$Varcondicion_1 & Data_Frame$Varcondicion_2, ...], method='lm', color='algÃºn_color', se=FALSE)+ # RegresiÃ³n en el grÃ¡fico
   
-  facet_wrap(~variable_categórica, ncol=N°) + # Gráfico separado por variable categórica
+  facet_wrap(~variable_categÃ³rica, ncol=NÂ°) + # GrÃ¡fico separado por variable categÃ³rica
   
-  xlim(N_min, N_máx) + # Valores eje absicas
-  ylim(N_min, N_máx) + # Valores eje ordenadas
-  scale_y_log10()+ # Escala logarítmica
+  xlim(N_min, N_mÃ¡x) + # Valores eje absicas
+  ylim(N_min, N_mÃ¡x) + # Valores eje ordenadas
+  scale_y_log10()+ # Escala logarÃ­tmica
   scale_x_date()+ # Escala con formato fechas
   scale_x_continuous(breaks = seq(Desde, Hasta, Delta)) + # Valores que queremos que aparezcan en el eje
-  theme_()+ # Tema del gráfico (minimal, dark, economist, classic ...)
+  theme_()+ # Tema del grÃ¡fico (minimal, dark, economist, classic ...)
   scale_colour_manual(values=c("#1b9e77", "#d95f02", "#826bb5", "#e7298a")) + # Colores personalizados para Var_colores
-  coord_flip() + # Invertir los ejes del gráfico
+  coord_flip() + # Invertir los ejes del grÃ¡fico
   
   labs(title = "Texto",
        subtitle = "Texto",
@@ -93,17 +93,17 @@ Data_Frame %>% ggplot(mapping=aes(x=Var_absicas, y=Var_ordenadas, color=Var_para
        y= NULL,
        caption = "Texto")+
   
-  theme(plot.title = element_text(family = "serif", size = N°) "Elegimos el tipo de letra y tamaño"
-        plot.subtitle = element_text(family = "Bookman", size = N°) "Elegimos el tipo de letra y tamaño"
-        plot.caption = element_text(hjust = 1), # Ajuste de ubicación de las Notas
-        axis.line = element_line(size = N°), # Elegimos grosor de ejes 
-        legend.title = element_blank(), # Sin título de leyenda
-        legend.position = c(0.9, 0.3)) # Posición de leyenda
+  theme(plot.title = element_text(family = "serif", size = NÂ°) "Elegimos el tipo de letra y tamaÃ±o"
+        plot.subtitle = element_text(family = "Bookman", size = NÂ°) "Elegimos el tipo de letra y tamaÃ±o"
+        plot.caption = element_text(hjust = 1), # Ajuste de ubicaciÃ³n de las Notas
+        axis.line = element_line(size = NÂ°), # Elegimos grosor de ejes 
+        legend.title = element_blank(), # Sin tÃ­tulo de leyenda
+        legend.position = c(0.9, 0.3)) # PosiciÃ³n de leyenda
 
 # Regresiones 
 mco <- lm(Var_dep ~ Var_ind_1 + Var_ind_2 + ..., data = Data_Frame) 
 mco <- lm(Var_dep ~ 0 + Var_ind_1 + Var_ind_2 + ..., data = Data_Frame) # Modelo sin Constante
-mco <- lm(Var_dep ~ 1, data = Data_Frame) # Modelo sólo con Constante
+mco <- lm(Var_dep ~ 1, data = Data_Frame) # Modelo sÃ³lo con Constante
 
 probit <- glm(Var_dep ~ Var_ind_1 + Var_ind_2 + ..., family = binomial(link = "probit"), data = Data_Frame)
 
@@ -111,11 +111,11 @@ probitmfx(Var_dep ~ Var_ind_1 + Var_ind_2 + ..., data = Data_Frame, atmean=FALSE
 marginal_en_promedio <- probitmfx(Var_dep ~ Var_ind_1 + Var_ind_2 + ..., data = Data_Frame, atmean=TRUE)$mfxest # Efecto Marginal en el Promedio
 
 
-# Comparación de modelos 
+# ComparaciÃ³n de modelos 
 stargazer(mco, probit, coef = list(NULL, marginal_en_promedio[,1]), 
           se = list(NULL, marginal_en_promedio[,2]), 
           type = "text",
-          title = "Comparación de modelos",
+          title = "ComparaciÃ³n de modelos",
           dep.var.labels = "Etiqueta Var Dependiente",
           model.numbers = FALSE,
           column.labels = c("Etiqueta_1", "Etiqueta_2",...))
@@ -124,7 +124,7 @@ stargazer(mco, probit, coef = list(NULL, marginal_en_promedio[,1]),
 sctest(Data_frame$Var_dep ~ Data_frame$Var_ind, type = "Chow", point = Punto_de_quiebre)
 
 
-# Códigos sueltos
+# CÃ³digos sueltos
 arrange(Var_1, Var_2, ...) # Orden ascendente de observaciones en variables
 
 
